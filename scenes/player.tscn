@@ -1,28 +1,65 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2o5ykxohklfq"]
+[gd_scene load_steps=8 format=3 uid="uid://b2o5ykxohklfq"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_tkyp2"]
+[ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_cxrgc"]
+[ext_resource type="Script" path="res://scenes/scripts/SpringArm3D.gd" id="2_dceu0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lrisq"]
-radius = 0.3
-height = 1.5
+radius = 0.2
+height = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oq0mf"]
+albedo_color = Color(0.862745, 0.270588, 0.231373, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wsnfh"]
-radius = 0.3
-height = 1.5
+material = SubResource("StandardMaterial3D_oq0mf")
+radius = 0.15
+height = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfqir"]
+albedo_color = Color(0.87451, 0.788235, 0.709804, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_k07jg"]
-radius = 0.2
-height = 0.3
+material = SubResource("StandardMaterial3D_rfqir")
+radius = 0.13
+height = 0.1
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_tkyp2")
+script = ExtResource("1_cxrgc")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.200037, 0)
+margin = 0.2
+script = ExtResource("2_dceu0")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_lrisq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_wsnfh")
+[node name="Player_move" type="Node3D" parent="."]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.360915, -0.234247)
+[node name="OmniLight3D" type="OmniLight3D" parent="Player_move"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.169331, -0.0263043, -0.31615)
+light_color = Color(0.870588, 0.486275, 0.345098, 1)
+light_energy = 3.477
+omni_range = 2.70134
+
+[node name="Body" type="MeshInstance3D" parent="Player_move"]
+mesh = SubResource("CapsuleMesh_wsnfh")
+skeleton = NodePath("../..")
+
+[node name="Face" type="MeshInstance3D" parent="Player_move/Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.121812, -0.10915)
 mesh = SubResource("SphereMesh_k07jg")
+skeleton = NodePath("../../..")
+
+[node name="WallCheck" type="Node3D" parent="Player_move"]
+
+[node name="WallCheckRayCast" type="RayCast3D" parent="Player_move/WallCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0914877, 0)
+target_position = Vector3(0, 0, -0.4)
+
+[node name="StillOnWallCheckRayCast" type="RayCast3D" parent="Player_move/WallCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.308301, 0)
+target_position = Vector3(0, 0, -0.4)

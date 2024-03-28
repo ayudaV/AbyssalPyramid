@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://hlbs128d5etl"]
+
+[ext_resource type="Script" path="res://scenes/scripts/structs.gd" id="1_6p6fn"]
+[ext_resource type="Script" path="res://scenes/scripts/free_camera.gd" id="2_qpw8o"]
+
+[sub_resource type="Gradient" id="Gradient_8x6jt"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mukw0"]
+gradient = SubResource("Gradient_8x6jt")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8jmfm"]
+panorama = SubResource("GradientTexture1D_mukw0")
+
+[sub_resource type="Sky" id="Sky_m73sf"]
+sky_material = SubResource("PanoramaSkyMaterial_8jmfm")
+
+[sub_resource type="Environment" id="Environment_qftsb"]
+background_mode = 2
+sky = SubResource("Sky_m73sf")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 16.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkag3"]
+albedo_color = Color(0.294118, 0.533333, 0.290196, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_do430"]
+material = SubResource("StandardMaterial3D_qkag3")
+size = Vector2(20, 20)
+
+[node name="Structs" type="Node3D"]
+script = ExtResource("1_6p6fn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qftsb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_do430")
+
+[node name="House" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.18552, 10.2208)
+script = ExtResource("2_qpw8o")

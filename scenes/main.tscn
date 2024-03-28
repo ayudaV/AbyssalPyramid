@@ -6,12 +6,6 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_6865m")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.936947, 0.236796, 0.257018, 0.319713, 0.283825, 0.904006, 0.141117, 0.929178, -0.341635, -0.160234, 23.6828, -0.164745)
-
 [node name="Maze" type="Node3D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("3_t4sga")]
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.614134, 0.789202, 0, -0.789202, 0.614134, 0, 4.32782, 3.4458)
