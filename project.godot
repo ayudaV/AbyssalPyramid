@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AbyssalPyramid"
-run/main_scene="res://scenes/house_structs/conect_house_wall_2_wood_beam.tscn"
+run/main_scene="res://scenes/house_structs/house_wall.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
