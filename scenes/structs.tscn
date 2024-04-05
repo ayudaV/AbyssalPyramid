@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://hlbs128d5etl"]
 
-[ext_resource type="Script" path="res://scenes/scripts/structs.gd" id="1_6p6fn"]
+[ext_resource type="PackedScene" uid="uid://bmpc5g88gohl7" path="res://house.tscn" id="1_hwljl"]
 [ext_resource type="Script" path="res://scenes/scripts/free_camera.gd" id="2_qpw8o"]
 
 [sub_resource type="Gradient" id="Gradient_8x6jt"]
@@ -30,7 +30,6 @@ material = SubResource("StandardMaterial3D_qkag3")
 size = Vector2(40, 40)
 
 [node name="Structs" type="Node3D"]
-script = ExtResource("1_6p6fn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qftsb")
@@ -39,16 +38,15 @@ environment = SubResource("Environment_qftsb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("PlaneMesh_do430")
 
-[node name="House1" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+[node name="House" parent="." instance=ExtResource("1_hwljl")]
 
-[node name="House2" type="Node3D" parent="."]
+[node name="House2" parent="." instance=ExtResource("1_hwljl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
 
-[node name="House3" type="Node3D" parent="."]
+[node name="House3" parent="." instance=ExtResource("1_hwljl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
 
-[node name="House4" type="Node3D" parent="."]
+[node name="House4" parent="." instance=ExtResource("1_hwljl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
 
 [node name="Camera3D" type="Camera3D" parent="."]
